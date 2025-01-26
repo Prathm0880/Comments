@@ -9,4 +9,19 @@ public class Post {
     private String description;
     private String content;
 
+    public String getPostId() {
+        return postId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getContent() {
+        return content;
+    }
 }
