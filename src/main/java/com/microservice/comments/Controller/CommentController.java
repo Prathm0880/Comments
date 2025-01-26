@@ -5,10 +5,9 @@ import com.microservice.comments.Service.CommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -17,8 +16,13 @@ public class CommentController {
     private CommentsService commentsService;
 
     @PostMapping()
-    public ResponseEntity<Comments> addCommenet(@RequestBody Comments comments){
+    public ResponseEntity<Comments> addComment(@RequestBody Comments comments){
         Comments comments1 = commentsService.addComments(comments);
         return new ResponseEntity<>(comments1, HttpStatus.OK);
+    }
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Comments>>allComments(@PathVariable String postId){
+        List<Comments> comments = commentsService.getComments(postId);
+        return new ResponseEntity<>(comments,HttpStatus.OK);
     }
 }
